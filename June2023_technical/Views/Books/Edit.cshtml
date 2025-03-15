@@ -1,0 +1,46 @@
+@model BookManagementApp.Models.Book
+
+<h2 class="mb-4">Edit Book</h2>
+
+<div class="card shadow-sm p-4">
+    <form asp-action="Edit">
+        <div class="row mb-3">
+            <label for="Title" class="col-sm-3 col-form-label">Title</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" placeholder="Enter the book title" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Author" class="col-sm-3 col-form-label">Author</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="Author" name="Author" value="@Model.Author" placeholder="Enter the author's name" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="PublicationYear" class="col-sm-3 col-form-label">Publication Year</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="PublicationYear" name="PublicationYear" value="@Model.PublicationYear" placeholder="Enter the publication year" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Genre" class="col-sm-3 col-form-label">Genre</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="Genre" name="Genre" value="@Model.Genre" placeholder="Enter the genre" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="Price" class="col-sm-3 col-form-label">Price</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="Price" name="Price" value="@Model.Price" placeholder="Enter the price" />
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">Update Book</button>
+        </div>
+    </form>
+</div>
