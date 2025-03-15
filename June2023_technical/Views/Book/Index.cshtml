@@ -1,0 +1,29 @@
+﻿@using January2024_technical.Models
+@model IEnumerable<January2024_technical.Models.Book>
+
+    <div class=" container text-center">
+        <h1>Books</h1>
+    <div>
+        <a asp-controller="Book" asp-action="AddBook" class="btn btn-outline-dark">
+            <i class="bi bi-plus-circle"></i> Add New Book
+        </a>
+    </div>
+    <table id="bookTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>PublicatiionYear</th>
+                <th>Genre</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+
+    </table>
+    </div>
+
+@section Scripts
+    {
+    <script src="~/js/book.js"></script>
+}

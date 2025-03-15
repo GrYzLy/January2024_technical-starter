@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
+using June2024_technical.Models;
 using Microsoft.AspNetCore.Mvc;
-using June2023_technical.Models;
 
-namespace June2023_technical.Controllers;
+namespace June2024_technical.Controllers;
 
 public class HomeController : Controller
 {

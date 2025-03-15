@@ -1,0 +1,36 @@
+﻿@model January2024_technical.Models.NewBookModel
+
+<div class="container">
+    <h2>Add book</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3 row p-1">
+            <label asp-for="Title" class="p-0">Book Title</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Author" class="p-0">Book Author</label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-asp-validation-for="Author" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="PublicatiionYear" class="p-0">Publication Year</label>
+            <input asp-for="PublicatiionYear" class="form-control" />
+            <span asp-asp-validation-for="PublicatiionYear" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Genre" class="p-0">Genre</label>
+            <input asp-for="Genre" class="form-control" />
+            <span asp-asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Price" class="p-0">Price</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <button class="btn btn-success" type="submit">Add New Book</button>
+        <a class="btn btn-outline-dark" asp-controller="Book" asp-action="Index">Back To Books List Page</a>
+    </form>
+        
+
+</div>

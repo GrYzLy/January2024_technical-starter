@@ -1,4 +1,4 @@
-﻿namespace June2023_technical.Models;
+﻿namespace June2024_technical.Models;
 
 public class ErrorViewModel
 {
