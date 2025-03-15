@@ -1,25 +1,35 @@
 ﻿using January2024_technical.Models;
 using January2024_technical.Repositories;
+using January2024_technical.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace January2024_technical.Controllers
 {
     public class BookController : Controller
     {
-        private readonly IBookRepository _repository;
+        private readonly IBookService _bookService;
         private readonly ILogger<BookController> _logger;
 
-        public BookController(IBookRepository repository, ILogger<BookController> logger)
+        public BookController(IBookService bookService, ILogger<BookController> logger)
         {
-            _repository = repository;
+           _bookService = bookService;
             _logger = logger;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var books = await _repository.GetAllAsync();  
-            return View(books);
+            try
+            {
+                var books = await _bookService.GetAllBooksAsync();
+                return View(books);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving the list of books.");
+                TempData["ErrorMessage"] = "Couldn't load books!";
+                return View();
+            }
         }
 
         [HttpGet]
@@ -35,18 +45,18 @@ namespace January2024_technical.Controllers
             {
                 try
                 {
-                    await _repository.AddAsync(book);
-                    await _repository.SaveAsync();
+                    await _bookService.AddBookAsync(book);
                     TempData["SuccessMessage"] = "Book added successfully!";
-                    return RedirectToAction("Index"); 
+                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "An error occurred while adding a book.");
-                    return BadRequest("Couldn't create book!");
+                    TempData["ErrorMessage"] = "Couldn't create book!";
+                    return RedirectToAction("Index");
                 }
-                
             }
+
             return View(book);
         }
 
@@ -54,18 +64,26 @@ namespace January2024_technical.Controllers
         
         public async Task<IActionResult> Delete(int id)
         {
-            var book = await _repository.GetByIdAsync(id);
-
-            if (book == null)
+            try
             {
-                return NotFound();
+                var book = await _bookService.GetBookByIdAsync(id);
+
+                if (book == null)
+                {
+                    return NotFound();
+                }
+
+                await _bookService.DeleteBookAsync(id);
+
+                TempData["SuccessMessage"] = "Book deleted successfully!";
+                return RedirectToAction("Index");
             }
-
-            await _repository.DeleteAsync(book);
-            await _repository.SaveAsync();
-
-            TempData["SuccessMessage"] = "Book deleted successfully!";
-            return RedirectToAction("Index"); 
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while deleting the book.");
+                TempData["ErrorMessage"] = "Couldn't delete book!";
+                return RedirectToAction("Index");
+            }
         }
     }
 }
