@@ -1,0 +1,44 @@
+﻿@using January2024_technical.Models
+
+@model IEnumerable<Book>  
+
+<h2>Books List</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Year</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.PublicationYear</td>
+                <td>@book.Genre</td>
+                <td>@book.Price</td>
+                <td>
+                   
+                    <form asp-action="Delete" asp-route-id="@book.Id" method="post" onsubmit="return confirm('You sure?');">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
