@@ -1,0 +1,42 @@
+﻿@model IEnumerable<January2024_technical.Models.Book>
+
+@{
+    ViewData["Title"] = "Lista Książek";
+}
+
+<h2>Lista Książek</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Dodaj nową książkę</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Rok wydania</th>
+            <th>Gatunek</th>
+            <th>Cena</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.PublicationYear</td>
+                <td>@book.Genre</td>
+                <td>@book.Price zł</td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@book.Id" />
+                        <button type="submit" class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
