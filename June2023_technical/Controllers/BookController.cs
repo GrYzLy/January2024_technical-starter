@@ -37,6 +37,34 @@ namespace January2024_technical.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult SearchById()
+        {
+            return View(); 
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SearchById(int id)
+        {
+            try
+            {
+                var book = await _bookService.GetBookByIdAsync(id);
+                if (book == null)
+                {
+                    TempData["ErrorMessage"] = "Book not found.";
+                    return View();
+                }
+
+                return View("BookDetails", book); 
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error searching for book by ID.");
+                TempData["ErrorMessage"] = "An error occurred while searching for the book.";
+                return View();
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create(Book book)

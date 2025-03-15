@@ -4,7 +4,7 @@ namespace January2024_technical.Models
 {
     public class Book
     {
-
+        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Title is required")]

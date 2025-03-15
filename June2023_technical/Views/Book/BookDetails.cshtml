@@ -1,0 +1,18 @@
+﻿@using January2024_technical.Models
+
+@model Book
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<h2>Book Details</h2>
+
+<div>
+    <h3>Title: @Model.Title</h3>
+    <p><strong>Author:</strong> @Model.Author</p>
+    <p><strong>Publication Year:</strong> @Model.PublicationYear</p>
+    <p><strong>Genre:</strong> @Model.Genre</p>
+    <p><strong>Price:</strong> @Model.Price</p>
+</div>
+
